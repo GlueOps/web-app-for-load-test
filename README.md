@@ -1,11 +1,7 @@
 # web-app-simulate-workload
 The goal of this app is to use it on the receiving end of a load testing tool. 
 
-## Setting up .env file
-
-- Clone the repository you want to work on and ```cd``` into that directory.
-  
-## Running the QR code generator
+## Running the app
 
 - Development environment
 
