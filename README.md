@@ -1,5 +1,7 @@
 # web-app-simulate-workload
-The goal of this app is to use it on the receiving end of a load testing tool. 
+The goal of this app is to use it on the receiving end of a load testing tool. It supports:
+- Slow response times with /v1/sleep
+- Uploading files with /v1/uploadfile
 
 ## Running the app
 
