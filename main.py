@@ -34,7 +34,7 @@ def delay_response(ms: int):
 @app.post("/v1/uploadfile/")
 async def upload_file(file: UploadFile = File(...)):
     start_time = time.time()
-    file_location = f"uploaded_files/{file.filename}"
+    file_location = f"{file.filename}"
     with open(file_location, "wb+") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
