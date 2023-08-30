@@ -8,20 +8,42 @@ app = FastAPI()
 @app.get("/uploadfile", response_class=HTMLResponse)
 async def get():
     html_content = """
+    <!DOCTYPE html>
     <html>
-        <head>
-            <title>Upload a File</title>
-        </head>
-        <body>
-            <h1>Upload a File</h1>
-            <form action="/v1/uploadfile/" enctype="multipart/form-data" method="post">
-                <input type="file" name="file"><br><br>
-                <input type="submit">
-            </form>
-        </body>
+    <head>
+        <title>File Upload</title>
+    </head>
+    <body>
+    <h1>Upload File</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file">
+        <button type="submit">Upload</button>
+    </form>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById('uploadForm');
+        const fileInput = document.getElementById('fileInput');
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            const startTime = new Date().getTime();
+            const response = await fetch('/v1/uploadfile/', {
+                method: 'POST',
+                body: formData,
+            });
+            const endTime = new Date().getTime();
+            const timeTaken = endTime - startTime; // Time in milliseconds
+            const result = await response.json();
+            alert(`Upload complete. Server Response: ${JSON.stringify(result)}. Time taken: ${timeTaken} ms`);
+        });
+    });
+    </script>
+    </body>
     </html>
     """
     return HTMLResponse(content=html_content)
+
 
 @app.get("/v1/sleep")
 def delay_response(ms: int):
